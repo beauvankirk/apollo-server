@@ -1,9 +1,12 @@
 {
-  "private": true,
+  "name:": "graphql-server-repack",
+  "version": "0.0.0",
+  "description": "fork packed as single module to be used as git url dep",
+  "main":"index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/apollostack/graphql-server.git"
+    "url": "git+https://github.com/beauvankirk/graphql-server.git"
   },
   "scripts": {
     "compile": "lerna exec -- npm run compile",
