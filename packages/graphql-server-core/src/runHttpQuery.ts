@@ -114,6 +114,7 @@ export async function runHttpQuery(handlerArguments: Array<any>, request: HttpQu
         query: query,
         variables: variables,
         context: context,
+        koaCtx: handlerArguments[0],
         rootValue: optionsObject.rootValue,
         operationName: operationName,
         logFunction: optionsObject.logFunction,
