@@ -23,7 +23,7 @@ export interface Product {
 export class ReviewsDataSource implements DataSource {
   private loader?: DataLoader<string, Review>;
   initialize() {
-    this.loader = new DataLoader((keys: string[]) =>
+    this.loader = new DataLoader((keys: readonly string[]) =>
       Promise.resolve(
         reviews.filter(({ id }) => {
           return keys.indexOf(id) > -1;
@@ -47,7 +47,7 @@ export class ReviewsDataSource implements DataSource {
 export class UsersDataSource implements DataSource {
   private loader?: DataLoader<string, User>;
   initialize() {
-    this.loader = new DataLoader((keys: string[]) =>
+    this.loader = new DataLoader((keys: readonly string[]) =>
       Promise.resolve(
         users.filter(({ id }) => {
           return keys.indexOf(id) > -1;

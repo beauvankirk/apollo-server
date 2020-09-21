@@ -1,5 +1,5 @@
 import { DataSource } from "apollo-datasource";
-import DataLoader from "dataloader";
+import DataLoader, { BatchLoadFn } from "dataloader";
 
 export interface Product {
   upc?: string;
@@ -15,7 +15,7 @@ export interface Product {
 export class ProductsDataSource implements DataSource {
   private loader?: DataLoader<string, Product>;
   initialize() {
-    this.loader = new DataLoader((keys: string[]) =>
+    this.loader = new DataLoader((keys: readonly string[]) =>
       Promise.resolve(
         products.filter(({ upc, sku, __typename, isbn }) => {
           if (__typename === "Book" && isbn) {

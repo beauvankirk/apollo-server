@@ -11,7 +11,7 @@ export interface Book {
 export class BooksDataSource implements DataSource {
   private loader?: DataLoader<string, Book>;
   initialize() {
-    this.loader = new DataLoader((keys: string[]) =>
+    this.loader = new DataLoader((keys: readonly string[]) =>
       Promise.resolve(
         books.filter(({ isbn }) => {
           return keys.indexOf(isbn) > -1;

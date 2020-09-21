@@ -37,13 +37,13 @@ export default function StrictOperationsPlugin(options: Options = Object.create(
       if (enforceClientNaming && !clientName) {
         logger.debug(`Operation has no identified client`);
 
-        throw new ApolloError("Execution denied: Operation has no identified client");
+        // throw new ApolloError("Execution denied: Operation has no identified client");
       }
 
       if (enforceClientVersion && !clientVersion) {
         logger.debug(`Client version is not identified for ${clientName}`);
 
-        throw new ApolloError(`Client version is not identified for ${clientName}`);
+        // throw new ApolloError(`Client version is not identified for ${clientName}`);
       }
 
       return {
@@ -61,7 +61,7 @@ export default function StrictOperationsPlugin(options: Options = Object.create(
               }
             });
 
-            throw error;
+            // throw error;
           }
         }
       };

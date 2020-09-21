@@ -11,7 +11,7 @@ export interface User {
 export class UsersDataSource implements DataSource {
   private loader?: DataLoader<string, User>;
   initialize() {
-    this.loader = new DataLoader((keys: string[]) =>
+    this.loader = new DataLoader((keys: readonly string[]) =>
       Promise.resolve(
         users.filter(({ id }) => {
           return keys.indexOf(id) > -1;

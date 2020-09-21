@@ -18,25 +18,31 @@ let gatewayOptions: GatewayConfig = {
   debug: isProd ? false : true,
   buildService({ url }) {
     return new AuthenticatedDataSource({ url });
-  }
+  },
+  serviceList: [
+    { name: "accounts", url: "http://localhost:4001" },
+    { name: "books", url: "http://localhost:4005" },
+    { name: "products", url: "http://localhost:4003" },
+    { name: "reviews", url: "http://localhost:4002" }
+  ],
 };
 
-if (!apolloKey) {
-  console.log(`Head over to https://studio.apollographql.com and create an account to follow walkthrough in the Acephei README`);
+// if (!apolloKey) {
+//   console.log(`Head over to https://studio.apollographql.com and create an account to follow walkthrough in the Acephei README`);
 
-  gatewayOptions = {
-    serviceList: [
-      { name: "accounts", url: "http://localhost:4001" },
-      { name: "books", url: "http://localhost:4005" },
-      { name: "products", url: "http://localhost:4003" },
-      { name: "reviews", url: "http://localhost:4002" }
-    ],
-    debug: isProd ? false : true,
-    buildService({ url }) {
-      return new AuthenticatedDataSource({ url });
-    }
-  }
-}
+//   gatewayOptions = {
+//     serviceList: [
+//       { name: "accounts", url: "http://localhost:4001" },
+//       { name: "books", url: "http://localhost:4005" },
+//       { name: "products", url: "http://localhost:4003" },
+//       { name: "reviews", url: "http://localhost:4002" }
+//     ],
+//     debug: isProd ? false : true,
+//     buildService({ url }) {
+//       return new AuthenticatedDataSource({ url });
+//     }
+//   }
+// }
 
 const apolloOperationRegistryPlugin = apolloKey ? require("apollo-server-plugin-operation-registry")({
   graphVariant,
@@ -57,16 +63,17 @@ const gateway = new ApolloGateway(gatewayOptions);
 const server = new ApolloServer({
   gateway,
   subscriptions: false, // Must be disabled with the gateway; see above.
-  engine: {
-    apiKey: apolloKey,   //We set the APOLLO_KEY environment variable
-    graphVariant,                           //We set the APOLLO_GRAPH_VARIANT environment variable
-    sendVariableValues: {
-      all: true
-    },
-    sendHeaders: {
-      all: true
-    }
-  },
+  // engine: {
+  //   apiKey: apolloKey,   //We set the APOLLO_KEY environment variable
+  //   graphVariant,                           //We set the APOLLO_GRAPH_VARIANT environment variable
+  //   sendVariableValues: {
+  //     all: true
+  //   },
+  //   sendHeaders: {
+  //     all: true
+  //   },
+  //   reportSchema: true
+  // },
   context: ({ req }) => {
     // get the user token from the headers
     const token = req.headers.authorization || "";

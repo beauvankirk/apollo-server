@@ -1,10 +1,11 @@
 {
   "name": "acephei",
+"version": "0.0.1",
   "description": "Full federation demo to illuminate good design patterns and practices.",
   "scripts": {
     "watch": "tsc --build tsconfig.json --watch",
     "start": "nodemon -e js,graphql,json --watch services start.js",
-    "postinstall": "tsc --build tsconfig.json",
+    "build": "tsc --build tsconfig.json",
     "check": "concurrently \"npm:check:*\"",
     "push": "concurrently \"npm:push:*\"",
     "clean": "git clean -dfqX -- ./node_modules **/{dist,node_modules}/ ./{services,clients}/*/tsconfig.tsbuildinfo ./__tmp__*",
@@ -18,6 +19,11 @@
     "push:reviews": "npx apollo service:push --localSchemaFile=./services/reviews/schema.graphql --serviceName=reviews --serviceURL=https://acephei-reviews.herokuapp.com"
   },
   "dependencies": {
+    "@apollo/gateway": "0.20.1",
+    "@apollo/federation": "0.20.1",
+    "apollo-datasource": "0.7.2",
+    "apollo-server": "2.17.0",
+    "apollo-server-plugin-operation-registry": "0.6.0",
     "accounts": "file:services/accounts",
     "books": "file:services/books",
     "gateway": "file:gateway",
@@ -29,7 +35,7 @@
     "concurrently": "4.1.2",
     "nodemon": "2.0.4",
     "react": "16.13.1",
-    "typescript": "3.9.7"
+    "typescript": "4.0.3"
   },
   "nodemonConfig": {
     "watch": [
